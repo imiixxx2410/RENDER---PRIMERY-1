@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0a0a;
+  --surface: #171717;
+  --surface-border: #262626;
+  --muted: #262626;
+  --muted-strong: #404040;
+  --text-primary: #f5f5f5;
+  --text-secondary: #a3a3a3;
+  --text-tertiary: #737373;
+  --accent: #d97706;
+  --accent-hover: #b45309;
+}
+
+html.light {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --surface-border: #e5e5e5;
+  --muted: #f0f0f0;
+  --muted-strong: #e0e0e0;
+  --text-primary: #171717;
+  --text-secondary: #525252;
+  --text-tertiary: #8a8a8a;
+  --accent: #d97706;
+  --accent-hover: #b45309;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+* {
+  transition-property: background-color, border-color, color, opacity, transform, box-shadow;
+  transition-duration: 150ms;
+  transition-timing-function: ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.5s ease both;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--muted-strong);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[dir="rtl"] body {
+  font-family: "Vazirmatn", Tahoma, sans-serif;
+}

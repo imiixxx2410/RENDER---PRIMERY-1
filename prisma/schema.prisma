@@ -1,0 +1,36 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  hashedPassword String
+  name           String?
+  avatarUrl      String?
+  bio            String?
+  website        String?
+  isPublic       Boolean  @default(true)
+  plan           String   @default("free") // free | pro | studio
+  createdAt      DateTime @default(now())
+
+  renders Render[]
+}
+
+model Render {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  originalUrl String // data URL (base64) of the uploaded image
+  resultUrl   String? // data URL of the "rendered" result
+  style       String   @default("photorealistic")
+  status      String   @default("completed") // pending | processing | completed | failed
+  createdAt   DateTime @default(now())
+
+  @@index([userId, createdAt])
+}
